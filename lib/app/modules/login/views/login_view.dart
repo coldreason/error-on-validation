@@ -50,121 +50,124 @@ class LoginView extends GetView<LoginController> {
                     height: 15,
                   ), //여기까지 로고
 
-                  Padding(
-                    //로그인 email 창
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(35),
-                      ),
-                      child: Form(
-                        key: LoginController().formKey,
-                        child: TextFormField(
-                          keyboardType: TextInputType.emailAddress,
-                          key: ValueKey(1),
-                          validator: (value) {
-                            if (value!.isEmpty || !value.contains('@')) {
-                              return 'Please enter a valid email address.';
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                            LoginController().userEmail = value!;
-                          },
-                          onChanged: (value) {
-                            LoginController().userEmail = value;
-                          },
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.account_circle,
-                              color: Colors.grey,
+                  Form(
+                    key: controller.formKey,
+                    child: Column(
+                      children: [
+                        Padding(
+                          //로그인 email 창
+                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              border: Border.all(color: Colors.white),
+                              borderRadius: BorderRadius.circular(35),
                             ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(34.0),
+                            child: TextFormField(
+                              keyboardType: TextInputType.emailAddress,
+                              key: ValueKey(1),
+                              validator: (value) {
+                                if (value!.isEmpty || !value.contains('@')) {
+                                  return 'Please enter a valid email address.';
+                                }
+                                return null;
+                              },
+                              onSaved: (value) {
+                                controller.userEmail = value!;
+                              },
+                              onChanged: (value) {
+                                controller.userEmail = value;
+                              },
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.account_circle,
+                                  color: Colors.grey,
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(34.0),
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.green, width: 2),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(35.0),
+                                  ),
+                                ),
+                                hintText: 'User email',
+                                hintStyle:
+                                    TextStyle(fontSize: 14, color: Colors.grey),
+                                contentPadding: EdgeInsets.all(10),
                               ),
                             ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.green, width: 2),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(35.0),
-                              ),
-                            ),
-                            hintText: 'User email',
-                            hintStyle:
-                                TextStyle(fontSize: 14, color: Colors.grey),
-                            contentPadding: EdgeInsets.all(10),
                           ),
                         ),
-                      ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                          //password 창
+                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              border: Border.all(color: Colors.white),
+                              borderRadius: BorderRadius.circular(35),
+                            ),
+                            child: TextFormField(
+                              key: ValueKey(2),
+                              validator: (value) {
+                                if (value!.isEmpty || value.length < 6) {
+                                  return 'Password must be at least 7 characters long.';
+                                }
+                                return null;
+                              },
+                              onSaved: (value) {
+                                controller.userPassword = value!;
+                              },
+                              onChanged: (value) {
+                                controller.userPassword = value;
+                              },
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.lock,
+                                  color: Colors.grey,
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(34.0),
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: Colors.green, width: 2),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(35.0),
+                                  ),
+                                ),
+                                hintText: 'password',
+                                hintStyle:
+                                TextStyle(fontSize: 14, color: Colors.grey),
+                                contentPadding: EdgeInsets.all(10),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ), //로그인 email 창
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    //password 창
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(35),
-                      ),
-                      child: Form(
-                        key: LoginController().formKey,
-                        child: TextFormField(
-                          key: ValueKey(2),
-                          validator: (value) {
-                            if (value!.isEmpty || value.length < 6) {
-                              return 'Password must be at least 7 characters long.';
-                            }
-                            return null;
-                          },
-                          onSaved: (value) {
-                            LoginController().userPassword = value!;
-                          },
-                          onChanged: (value) {
-                            LoginController().userPassword = value;
-                          },
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.lock,
-                              color: Colors.grey,
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(34.0),
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.green, width: 2),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(35.0),
-                              ),
-                            ),
-                            hintText: 'password',
-                            hintStyle:
-                                TextStyle(fontSize: 14, color: Colors.grey),
-                            contentPadding: EdgeInsets.all(10),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ), //password 창
+
+                  //password 창
                   SizedBox(
                     height: 10,
                   ),
                   GestureDetector(
                     //circular indicator 보여주는 코드 + 로그인 버튼
                     onTap: () {
-                      LoginController().tryValidation;
+                      controller.tryValidation;
                       // LoginController.instance.signin(emailController.text.trim(),
                       //           passwordController.text.trim());
                     //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
